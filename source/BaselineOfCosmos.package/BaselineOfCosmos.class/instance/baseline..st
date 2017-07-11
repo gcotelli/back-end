@@ -26,9 +26,7 @@ baseline: spec
 				package: 'Cosmos-Commands-API-Tests' with: [ spec requires: #('Cosmos-Commands-API-Core' 'Cosmos-UserStoryTests') ];
 				package: 'Cosmos-Code-Quality-Tests'.
 			spec
-				group: 'Deployment'
-					with:
-					#('Cosmos-Core' 'Cosmos-Data-Core' 'Cosmos-ConditionalTrigger-Core' 'Cosmos-Commands-Core' 'Cosmos-API-Core' 'Cosmos-Data-API-Core' 'Cosmos-Commands-API-Core');
+				group: 'Deployment' with: #('Cosmos-Core' 'Cosmos-Data-Core' 'Cosmos-ConditionalTrigger-Core' 'Cosmos-Commands-Core' 'Cosmos-API-Core' 'Cosmos-Data-API-Core' 'Cosmos-Commands-API-Core');
 				group: 'Tests'
 					with:
 					#('Cosmos-Tests' 'Cosmos-UserStoryTests' 'Cosmos-Data-Tests' 'Cosmos-ConditionalTrigger-Tests' 'Cosmos-Commands-Tests' 'Cosmos-API-Tests' 'Cosmos-Data-API-Tests' 'Cosmos-Commands-API-Tests' 'Cosmos-Code-Quality-Tests');

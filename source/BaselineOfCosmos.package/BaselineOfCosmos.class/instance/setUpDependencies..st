@@ -26,4 +26,10 @@ setUpDependencies: spec
 		with: [ spec
 				loads: #('REST' 'WebSocket');
 				versionString: #stable;
-				repository: 'http://mc.stfx.eu/ZincHTTPComponets' ]
+				repository: 'http://mc.stfx.eu/ZincHTTPComponets' ].
+	spec
+		configuration: 'MQTT'
+		with: [ spec
+				loads: #('MQTT-Core' 'MQTT-Client');
+				versionString: #development;
+				repository: 'github://svenvc/mqtt:master/repository' ]
