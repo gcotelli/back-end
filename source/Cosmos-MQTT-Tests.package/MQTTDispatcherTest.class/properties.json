@@ -1,0 +1,13 @@
+{
+	"commentStamp" : "",
+	"super" : "SystemBasedUserStoryTest",
+	"category" : "Cosmos-MQTT-Tests",
+	"classinstvars" : [ ],
+	"pools" : [ ],
+	"classvars" : [ ],
+	"instvars" : [
+		"dataInterface"
+	],
+	"name" : "MQTTDispatcherTest",
+	"type" : "normal"
+}
