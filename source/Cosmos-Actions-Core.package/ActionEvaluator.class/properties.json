@@ -1,11 +1,11 @@
 {
 	"commentStamp" : "",
-	"super" : "Error",
-	"category" : "Cosmos-API-Core-Model",
+	"super" : "Object",
+	"category" : "Cosmos-Actions-Core",
 	"classinstvars" : [ ],
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [ ],
-	"name" : "ResourceNotFound",
+	"name" : "ActionEvaluator",
 	"type" : "normal"
 }
