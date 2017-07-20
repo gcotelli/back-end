@@ -1,8 +1,17 @@
 {
 	"instance" : {
-		"initialize" : "JulianMaestri 7/19/2017 01:19",
+		"startUp" : "JulianMaestri 7/20/2017 00:58",
+		"handleMessage:" : "JulianMaestri 7/19/2017 01:23",
+		"shutDown" : "JulianMaestri 7/20/2017 00:58",
 		"when:do:" : "JulianMaestri 7/19/2017 01:24",
-		"handleMessage:" : "JulianMaestri 7/19/2017 01:23"
+		"nextOutgoingMessage" : "JulianMaestri 7/20/2017 01:23",
+		"dispatchProcessBlock" : "JulianMaestri 7/20/2017 01:20",
+		"publishMessage:toTopic:" : "JulianMaestri 7/20/2017 01:23",
+		"finalize" : "JulianMaestri 7/20/2017 00:59",
+		"initialize" : "JulianMaestri 7/20/2017 01:20",
+		"queueIncomingMessage:" : "JulianMaestri 7/20/2017 01:20"
 	},
-	"class" : { }
+	"class" : {
+		"dispatchProcessName" : "JulianMaestri 7/20/2017 00:57"
+	}
 }

@@ -1,0 +1,4 @@
+initialization
+queueIncomingMessage: aMQTTMessage
+
+	incomingMessages nextPut: aMQTTMessage

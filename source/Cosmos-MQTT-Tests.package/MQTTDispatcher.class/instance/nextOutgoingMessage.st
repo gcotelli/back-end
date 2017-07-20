@@ -1,0 +1,4 @@
+initialization
+nextOutgoingMessage
+
+	^ outgoingMessages next

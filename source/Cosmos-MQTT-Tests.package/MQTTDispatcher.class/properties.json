@@ -7,7 +7,10 @@
 	"classvars" : [ ],
 	"instvars" : [
 		"dataInterface",
-		"rules"
+		"rules",
+		"dispatchProcess",
+		"incomingMessages",
+		"outgoingMessages"
 	],
 	"name" : "MQTTDispatcher",
 	"type" : "normal"
