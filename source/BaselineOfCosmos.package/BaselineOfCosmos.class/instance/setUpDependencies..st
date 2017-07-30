@@ -22,8 +22,7 @@ setUpDependencies: spec
 				versionString: #stable;
 				repository: 'http://smalltalkhub.com/mc/zeroflag/Teapot/main/' ].
 	spec
-		configuration: 'MQTT'
+		baseline: 'MQTT'
 		with: [ spec
-				loads: #('MQTT-Core' 'MQTT-Client');
-				versionString: #development;
+				loads: #('Deployment');
 				repository: 'github://serpi90/mqtt:master/repository' ]
