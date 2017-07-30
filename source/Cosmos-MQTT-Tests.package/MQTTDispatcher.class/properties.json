@@ -6,7 +6,6 @@
 	"pools" : [ ],
 	"classvars" : [ ],
 	"instvars" : [
-		"dataInterface",
 		"rules",
 		"dispatchProcess",
 		"incomingMessages",

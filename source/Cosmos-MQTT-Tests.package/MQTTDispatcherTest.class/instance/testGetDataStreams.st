@@ -5,12 +5,12 @@ testGetDataStreams
 
 	dispatcher := MQTTDispatcher new.
 	dispatcher
-		when: 'GET/data-channel/(.+)' asRegex
-		do: [ :topic :message :matches | dispatcher publishMessage: (dataInterface currentSnapshotOfChannelIdentifiedBy: (matches at: 1) asNumber) toTopic: message asString ].
+		when: 'GET/data-streams' asRegex
+		do: [ :topic :message :matches | dispatcher publishMessage: self expectedGetDataStreamsResponse toTopic: message asString ].
 	dispatcher
 		handleMessage:
 			(MQTTPublish new
-				topic: ('GET/data-channel/{identifier}' format: {(#identifier -> self channelId)} asDictionary);
+				topic: 'GET/data-streams' ;
 				message: '/the/response/topic').
 	outgoingMessage := dispatcher nextOutgoingMessage.
 	self assert: outgoingMessage key equals: '/the/response/topic'.

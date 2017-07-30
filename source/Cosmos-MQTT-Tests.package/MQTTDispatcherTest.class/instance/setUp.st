@@ -2,5 +2,5 @@ tests
 setUp
 
 	super setUp.
-	dataInterface := DataInterface workingWith: rootSystem.
+	dataInterface := RESTDataInterface workingWith: rootSystem.
 	(SensorsSampleAddOn on: rootSystem) install

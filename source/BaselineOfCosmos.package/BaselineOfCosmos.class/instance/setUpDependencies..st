@@ -22,14 +22,8 @@ setUpDependencies: spec
 				versionString: #stable;
 				repository: 'http://smalltalkhub.com/mc/zeroflag/Teapot/main/' ].
 	spec
-		configuration: 'ZincHTTPComponents'
-		with: [ spec
-				loads: #('REST' 'WebSocket');
-				versionString: #stable;
-				repository: 'http://mc.stfx.eu/ZincHTTPComponets' ].
-	spec
 		configuration: 'MQTT'
 		with: [ spec
 				loads: #('MQTT-Core' 'MQTT-Client');
 				versionString: #development;
-				repository: 'github://svenvc/mqtt:master/repository' ]
+				repository: 'github://serpi90/mqtt:master/repository' ]
