@@ -44,14 +44,6 @@ CosmosCommandLineHandler class >> description [
 	^ 'Cosmos command line handler'
 ]
 
-{ #category : #'private - activation' }
-CosmosCommandLineHandler >> addAllowOriginHeaderTo: aResponse ifOriginAt: aRequest matchesAny: allowedOrigins [
-
-	allowedOrigins
-		detect: [ :origin | origin = (aRequest headers at: 'Origin') ]
-		ifFound: [ :allowedOrigin | aResponse headers at: 'Access-Control-Allow-Origin' put: allowedOrigin ]
-]
-
 { #category : #'private - accessing' }
 CosmosCommandLineHandler >> allowedOrigins [
 
@@ -94,23 +86,22 @@ CosmosCommandLineHandler >> buildAndStartCosmos [
 { #category : #'private - activation' }
 CosmosCommandLineHandler >> buildAndStartCosmosAPI [
 
-	| teapot configurator |
+	| api |
 
-	teapot := self teapot.
-	configurator := ReflectiveRoutesConfigurator appliedTo: teapot.
+	api := HTTPBasedRESTfulAPI
+		configuredBy: self serverConfiguration
+		installing:
+			{(DataStreamsRESTfulWebService workingWith: cosmos).
+			(DataPointsRESTfulWebService workingWith: cosmos).
+			(CommandsRESTfulWebService workingWith: cosmos).
+			(ActionsWebService workingWith: cosmos)}.
 
-	configurator
-		addRoutesOf: (DataStreamsRESTfulWebService workingWith: cosmos);
-		addRoutesOf: (DataPointsRESTfulWebService workingWith: cosmos);
-		addRoutesOf: (CommandsRESTfulWebService workingWith: cosmos);
-		addRoutesOf: (ActionsWebService workingWith: cosmos).
+	(TriggersAPIInstaller toInstallOn: api teapotServer workingWith: cosmos) install.
 
-	(TriggersAPIInstaller toInstallOn: teapot workingWith: cosmos) install.
-
-	self configureAllowOriginAfterFilterOn: teapot.
-	self configureExceptionHandlerOn: teapot.
-
-	teapot start
+	api
+		beCORSAwareAllowing: self allowedOrigins;
+		on: self exceptionsToHandle addErrorHandler: [ :signal :request | self dumpStackAndReport: signal ].
+	api start
 ]
 
 { #category : #'private - activation' }
@@ -149,48 +140,6 @@ CosmosCommandLineHandler >> configurationDefinition [
 		asArray
 ]
 
-{ #category : #'private - activation' }
-CosmosCommandLineHandler >> configureAllowOriginAfterFilterOn: aServer [
-
-	aServer
-		after:
-			'/*'
-				-> [ :request :response | 
-					self
-						addAllowOriginHeaderTo: response
-						ifOriginAt: request
-						matchesAny: self allowedOrigins.
-
-					response ];
-		when: [ :request | request headers includesKey: 'Origin' ]
-]
-
-{ #category : #'private - activation' }
-CosmosCommandLineHandler >> configureExceptionHandlerOn: aServer [
-
-	aServer
-		exception:
-			HTTPClientError
-				-> [ :signal :request | 
-					| errorMessage |
-
-					errorMessage := Dictionary new
-						at: #code put: signal tag;
-						at: #message put: signal messageText;
-						yourself.
-
-					(ZnResponse statusCode: signal tag)
-						headers:
-							(ZnHeaders defaultResponseHeaders
-								at: 'Access-Control-Allow-Origin' put: '*';
-								yourself);
-						entity: (ZnEntity json: (STONJSON toStringPretty: errorMessage));
-						yourself ].
-
-	aServer
-		exception: self exceptionsToHandle -> [ :signal :request | self dumpStackAndReport: signal ]
-]
-
 { #category : #'private - accessing' }
 CosmosCommandLineHandler >> logPrefix [
 
@@ -207,6 +156,13 @@ CosmosCommandLineHandler >> periodicalScheduler [
 CosmosCommandLineHandler >> portNumber [
 
 	^ self configuration at: 'port'
+]
+
+{ #category : #'private - accessing' }
+CosmosCommandLineHandler >> serverConfiguration [
+
+	^ {(#port -> self portNumber).
+	(#debugMode -> self isDebugModeEnabled)}
 ]
 
 { #category : #'private - accessing' }

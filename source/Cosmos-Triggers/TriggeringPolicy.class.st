@@ -4,6 +4,12 @@ Class {
 	#category : #'Cosmos-Triggers-Model'
 }
 
+{ #category : #evaluating }
+TriggeringPolicy >> apply: anAsynchronousCall to: aComponent on: aCanvas [
+
+	self subclassResponsibility
+]
+
 { #category : #registering }
 TriggeringPolicy >> deregister: aRegisteredTrigger from: aTriggerSystem [
 

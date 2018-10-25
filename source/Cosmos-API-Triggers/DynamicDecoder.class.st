@@ -5,7 +5,7 @@ Class {
 		'key',
 		'decoders'
 	],
-	#category : #'Cosmos-API-Decoding'
+	#category : #'Cosmos-API-Triggers'
 }
 
 { #category : #'instance creation' }
